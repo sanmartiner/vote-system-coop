@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode
 @ToString
-public class ResultoResponseDTO {
+public class ResultResponseDTO {
     private Long topicId;
     private Long totalVote;
     private Long votesYes;
