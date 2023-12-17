@@ -1,10 +1,7 @@
-package com.coop.votingsystem.model.Entitiy;
+package com.coop.votingsystem.model.entitiy;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.context.annotation.Description;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "topics", schema = "votingsystem")
@@ -15,9 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class Topics {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EmbeddedId
     private TopicsEntityId id;
+
     private String description;
 
 }

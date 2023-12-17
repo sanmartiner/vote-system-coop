@@ -1,8 +1,6 @@
-package com.coop.votingsystem.model.Entitiy;
+package com.coop.votingsystem.model.entitiy;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -15,6 +13,7 @@ import lombok.*;
 public class Associate {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String email;

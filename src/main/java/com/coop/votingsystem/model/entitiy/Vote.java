@@ -1,4 +1,4 @@
-package com.coop.votingsystem.model.Entitiy;
+package com.coop.votingsystem.model.entitiy;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,5 +15,5 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long associateId;
-    private Boolean vote;
+    private Boolean value;
 }

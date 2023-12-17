@@ -1,4 +1,4 @@
-package com.coop.votingsystem.model.Enums;
+package com.coop.votingsystem.model.enums;
 
 public enum VoteType {
 
