@@ -1,4 +1,4 @@
-package com.coop.votingsystem.dto;
+package com.coop.votingsystem.dto.response;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,6 +11,8 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class VoteResponseDTO {
     private String associateId;
+    private String topicId;
+    private String topicTitle;
     private String vote;
 
 }
