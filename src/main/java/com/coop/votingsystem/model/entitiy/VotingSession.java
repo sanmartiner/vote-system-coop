@@ -3,7 +3,7 @@ package com.coop.votingsystem.model.entitiy;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vote_session", schema = "votingsystem")
@@ -20,6 +20,6 @@ public class VotingSession {
     @ManyToOne
     @JoinColumn(name = "topic_id")
     private long topicsId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }
