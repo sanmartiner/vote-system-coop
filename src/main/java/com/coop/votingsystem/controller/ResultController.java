@@ -2,24 +2,18 @@ package com.coop.votingsystem.controller;
 
 import com.coop.votingsystem.dto.response.ResultResponseDTO;
 import com.coop.votingsystem.dto.response.TopicResponseDTO;
-import com.coop.votingsystem.model.entitiy.Topics;
-import com.coop.votingsystem.model.entitiy.TopicsEntityId;
+
 import com.coop.votingsystem.model.interfaces.TopicsService;
 import io.swagger.annotations.*;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 
 @RestController
 @RequestMapping("api/v1/votingSystem/result")

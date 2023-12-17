@@ -18,7 +18,8 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping("/api/v1/votingSystem/vote")
 public class VoteController {
-    VoteService voteService;
+
+    public final VoteService voteService;
 
        @Autowired
         public VoteController(VoteService voteService) {

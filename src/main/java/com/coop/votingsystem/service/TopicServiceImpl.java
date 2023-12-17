@@ -1,6 +1,5 @@
 package com.coop.votingsystem.service;
 
-import com.coop.votingsystem.dto.response.TopicResponseDTO;
 import com.coop.votingsystem.model.entitiy.Topics;
 import com.coop.votingsystem.model.interfaces.TopicsService;
 import com.coop.votingsystem.repository.TopicRepository;
@@ -12,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TopicServiceImpl implements TopicsService {

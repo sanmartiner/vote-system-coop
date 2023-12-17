@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 
 public interface VotingSessionService {
 
-    public VotingSession openSession(Topics topic, LocalDateTime end);
+    VotingSession openSession(Topics topic, LocalDateTime end);
 
 }
