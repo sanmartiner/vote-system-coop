@@ -1,4 +1,4 @@
-package com.coop.votingsystem.dto;
+package com.coop.votingsystem.dto.response;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -10,9 +10,10 @@ import java.util.Date;
 @SuperBuilder
 @EqualsAndHashCode
 @ToString
-public class TopicsResponseDTO {
+public class TopicResponseDTO {
+    private Long id;
     private String title;
-    private Date voting_date;
+    private Date votingDate;
     private String description;
 
 }

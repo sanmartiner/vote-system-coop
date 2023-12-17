@@ -1,4 +1,4 @@
-package com.coop.votingsystem.dto;
+package com.coop.votingsystem.dto.response;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
