@@ -1,12 +1,10 @@
 package com.coop.votingsystem.controller;
 
 import com.coop.votingsystem.dto.response.ResultResponseDTO;
-import com.coop.votingsystem.dto.response.TopicResponseDTO;
 
-import com.coop.votingsystem.model.interfaces.TopicsService;
+import com.coop.votingsystem.model.interfaces.ResultService;
 import io.swagger.annotations.*;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -18,12 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/votingSystem/result")
 public class ResultController {
-    private final TopicsService service;
-    private final ModelMapper modelMapper;
+    private final ResultService service;
     @Autowired
-    public ResultController(TopicsService service, ModelMapper modelMapper){
+    public ResultController(ResultService service){
         this.service = service;
-        this.modelMapper = modelMapper;
     }
 
 
@@ -42,10 +38,10 @@ public class ResultController {
 
     })
 
-    @GetMapping(value = "/{topicId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TopicResponseDTO> getOne(@PathVariable long id) {
-        TopicResponseDTO topic = modelMapper.map(service.getById(id), TopicResponseDTO.class);
-        return ResponseEntity.ok(topic);
+    @GetMapping(value = "/{sessionId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResultResponseDTO> getResult(@PathVariable long sessionId) {
+        ResultResponseDTO result = service.getResultBySession(sessionId);
+        return ResponseEntity.ok(result);
     }
 
 
