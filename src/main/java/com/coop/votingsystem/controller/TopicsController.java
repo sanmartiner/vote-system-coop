@@ -49,8 +49,8 @@ public class TopicsController {
                     .description(description)
                     .id(TopicsEntityId.builder()
                             .title(title)
-                            .votingDate(votingDate)
                             .build())
+                            .votingDate(votingDate)
                     .build());
             return ResponseEntity.ok(TopicResponseDTO.builder()
                             .id(id)
