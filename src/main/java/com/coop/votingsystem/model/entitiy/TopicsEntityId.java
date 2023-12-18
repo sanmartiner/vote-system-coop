@@ -1,5 +1,6 @@
 package com.coop.votingsystem.model.entitiy;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,11 @@ import java.util.Date;
 public class TopicsEntityId implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 5, nullable = false)
     private Long id;
+
+    @Column(name = "title")
     private String title;
-    private Date votingDate;
+
+
 }
