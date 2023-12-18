@@ -8,24 +8,94 @@
 		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.coop</groupId>
 	<artifactId>voting-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>voting-system</name>
 	<description>Coop Election System</description>
 	<properties>
-		<java.version>21.0.1</java.version>
+		<java.version>17</java.version>
 		<swagger.version>3.0.0</swagger.version>
+		<spring-boot.version>2.7.10</spring-boot.version>
+		<maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
 	</properties>
-	<dependencies>
-		<dependency>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-deploy-plugin</artifactId>
+			<version>${maven-deploy-plugin.version}</version>
+			<configuration>
+				<skip>false</skip>
+			</configuration>
+		</plugin>
+		<plugin>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<version>${spring-boot.version}</version>
+			<executions>
+				<execution>
+					<goals>
+						<goal>build-info</goal>
+						<goal>repackage</goal>
+					</goals>
+					<configuration>
+						<classifier>spring-boot</classifier>
+						<mainClass>
+							com.coop.votingsystem.RestApplication
+						</mainClass>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<dependency>
@@ -36,10 +106,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version> <!-- Use the appropriate version -->
+			<scope>provided</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -78,9 +150,9 @@
 		</dependency>
 
 		<dependency>
-  			<groupId>org.modelmapper</groupId>
-    		<artifactId>modelmapper</artifactId>
-    		<version>3.2.0</version>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -92,19 +164,6 @@
 
 	</dependencies>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
 
 </project>

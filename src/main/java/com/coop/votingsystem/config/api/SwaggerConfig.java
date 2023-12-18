@@ -25,7 +25,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .apis(RequestHandlerSelectors.basePackage("com.coop.votingsystem.controllers"))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Collections.singletonList(this.securitySchemes()))

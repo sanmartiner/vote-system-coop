@@ -9,4 +9,7 @@ public interface VotingSessionService {
 
     VotingSession openSession(Topics topic, LocalDateTime end);
 
+    boolean sessionExists(Topics topic, LocalDateTime now);
+
+    VotingSession save(VotingSession newSession);
 }

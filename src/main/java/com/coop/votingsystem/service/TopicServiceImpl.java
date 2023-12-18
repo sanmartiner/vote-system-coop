@@ -4,7 +4,6 @@ import com.coop.votingsystem.model.entitiy.Topics;
 import com.coop.votingsystem.model.interfaces.TopicsService;
 import com.coop.votingsystem.repository.TopicRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +17,9 @@ public class TopicServiceImpl implements TopicsService {
 
     private final TopicRepository repository;
 
+
     @Autowired
-    public TopicServiceImpl(TopicRepository repository, ModelMapper modelMapper){
+    public TopicServiceImpl(TopicRepository repository){
     this.repository = repository;
     }
     @Override

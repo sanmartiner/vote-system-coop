@@ -10,8 +10,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode
 @ToString
 public class VoteResponseDTO {
-    private String associateId;
-    private String topicId;
+    private Long associateId;
+    private Long topicId;
     private String topicTitle;
     private String vote;
 

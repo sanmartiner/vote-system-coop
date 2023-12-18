@@ -4,5 +4,5 @@ import com.coop.votingsystem.dto.response.VoteResponseDTO;
 
 public interface VoteService {
 
-    VoteResponseDTO register (Long topicsId, String associateID, String vote);
+    VoteResponseDTO register (Long topicsId, Long associateID, String vote);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 public class VotingSessionServiceImpl implements VotingSessionService {
@@ -24,7 +25,7 @@ public class VotingSessionServiceImpl implements VotingSessionService {
 
     public VotingSession openSession(Topics topic, LocalDateTime end) {
 
-        if (repository.existsByTopicEndAfter(topic, LocalDateTime.now())) {
+        if (this.sessionExists(topic, LocalDateTime.now())) {
             throw new VotingSessionException("Have an open session to this topic");
         }
 
@@ -32,10 +33,18 @@ public class VotingSessionServiceImpl implements VotingSessionService {
             throw new VotingSessionException("Invalid end date, the date should be on the future");
         }
 
-        VotingSession newSession = VotingSession.builder().topicsId(topic.getId().getId()).startDate(LocalDateTime.now()).endDate(end).build();
+        return repository.save(VotingSession.builder().endDate(end).startDate(LocalDateTime.now())
+                .topicsId(topic).build());
+    }
 
+    @Override
+    public boolean sessionExists(Topics topic, LocalDateTime now) {
+        return !Objects.isNull(repository.findByTopicsId(topic.getId().getId()));
+    }
 
-        return repository.save(newSession);
+    @Override
+    public VotingSession save(VotingSession newSession) {
+        return null;
     }
 }
 

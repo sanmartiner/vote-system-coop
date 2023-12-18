@@ -10,6 +10,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 @ControllerAdvice
 public class VotingSystemExceptionHandler extends ResponseEntityExceptionHandler {
+    public VotingSystemExceptionHandler(String s) {
+    }
+
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         return handleExceptionInternal(ex, "Invalid message", headers, HttpStatus.BAD_REQUEST,request);

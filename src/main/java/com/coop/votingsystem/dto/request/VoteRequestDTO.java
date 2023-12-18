@@ -11,6 +11,6 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class VoteRequestDTO {
     private Long topicsId;
-    private String associateID;
+    private Long associateID;
     private String vote;
 }

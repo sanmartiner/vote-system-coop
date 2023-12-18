@@ -15,5 +15,6 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long associateId;
-    private Boolean value;
+    private String value;
+    private Long sessionId;
 }
