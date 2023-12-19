@@ -4,7 +4,9 @@ import com.coop.votingsystem.dto.response.TopicResponseDTO;
 import com.coop.votingsystem.model.entitiy.Topics;
 import com.coop.votingsystem.model.entitiy.TopicsEntityId;
 import com.coop.votingsystem.model.interfaces.TopicsService;
+import com.coop.votingsystem.model.requestmodel.TopicRequestModel;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-
+@Slf4j
 @RestController
 @RequestMapping("api/v1/votingSystem/topics")
 public class TopicsController {
@@ -44,19 +46,19 @@ public class TopicsController {
     })
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<TopicResponseDTO> topicsRegister(@RequestParam String title, String description, Date votingDate) {
+        public ResponseEntity<TopicResponseDTO> topicsRegister(@RequestBody final TopicRequestModel topicRequestModel) {
             Long id = service.topicsRegister(Topics.builder()
-                    .description(description)
+                    .description(topicRequestModel.getDescription())
                     .id(TopicsEntityId.builder()
-                            .title(title)
+                            .title(topicRequestModel.getTitle())
                             .build())
-                            .votingDate(votingDate)
+                    .votingDate(topicRequestModel.getVotingDate())
                     .build());
             return ResponseEntity.ok(TopicResponseDTO.builder()
                             .id(id)
-                            .title(title)
-                            .description(description)
-                            .votingDate(votingDate).build());
+                            .title(topicRequestModel.getTitle())
+                            .description(topicRequestModel.getDescription())
+                            .votingDate(topicRequestModel.getVotingDate()).build());
         }
 
     @ApiOperation(value = "Get a register of a specific Topic", response = TopicResponseDTO.class)

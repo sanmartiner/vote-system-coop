@@ -5,6 +5,7 @@ import com.coop.votingsystem.model.entitiy.VotingSession;
 import com.coop.votingsystem.model.entitiy.Topics;
 import com.coop.votingsystem.model.interfaces.TopicsService;
 import com.coop.votingsystem.model.interfaces.VotingSessionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDateTime;
+@Slf4j
 @RestController
 @RequestMapping("api/v1/votingSystem/session")
 public class VotingSessionControler {

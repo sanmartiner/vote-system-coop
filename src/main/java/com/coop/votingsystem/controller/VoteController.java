@@ -42,7 +42,7 @@ public class VoteController {
         })
 
         @ResponseStatus(HttpStatus.CREATED)
-        @PutMapping("/register")
+        @PostMapping("/register")
         public ResponseEntity<VoteResponseDTO> save(@RequestBody VoteRequestDTO vote) throws URISyntaxException {
             VoteResponseDTO response = this.voteService.register(vote.getTopicsId(), vote.getAssociateID(), vote.getVote());
             return ResponseEntity.created(new URI(response.toString())).body(response);

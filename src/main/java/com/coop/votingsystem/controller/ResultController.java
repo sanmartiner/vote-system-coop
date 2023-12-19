@@ -5,6 +5,7 @@ import com.coop.votingsystem.dto.response.ResultResponseDTO;
 import com.coop.votingsystem.model.interfaces.ResultService;
 import io.swagger.annotations.*;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -12,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@Slf4j
 @RestController
 @RequestMapping("api/v1/votingSystem/result")
 public class ResultController {
