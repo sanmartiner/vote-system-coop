@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS voting_session (
-                                              id INT PRIMARY KEY,
+                                              id INT AUTO_INCREMENT PRIMARY KEY,
                                               topics_id INT NOT NULL,
                                               topics_title VARCHAR(255) NOT NULL,
                                               start_date TIMESTAMP NOT NULL,

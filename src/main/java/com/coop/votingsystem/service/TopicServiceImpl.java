@@ -1,5 +1,6 @@
 package com.coop.votingsystem.service;
 
+import com.coop.votingsystem.exceptionhandler.TopicCreateException;
 import com.coop.votingsystem.model.entitiy.Topics;
 import com.coop.votingsystem.model.interfaces.TopicsService;
 import com.coop.votingsystem.repository.TopicRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,8 +26,16 @@ public class TopicServiceImpl implements TopicsService {
     }
     @Override
     public Long topicsRegister(Topics topics) {
-        return repository.save(topics).getId().getId();
+        Topics t = repository.findByTopicsEntityIdTitle(topics.getTopicsEntityId().getTitle());
 
+        if(!Objects.isNull(t)) {
+            if (Objects.equals(t.getTopicsEntityId().getTitle(), topics.getTopicsEntityId().getTitle()) &&
+                    t.getVotingDate().equals(topics.getVotingDate())) {
+                throw new TopicCreateException("Has a topic registered with the same title and same voting date");
+            }
+        }
+
+        return repository.save(topics).getTopicsEntityId().getId();
     }
 
     @Override
@@ -35,7 +45,7 @@ public class TopicServiceImpl implements TopicsService {
 
     @Override
     public Topics getById(Long id) {
-        Optional<Topics> topicsOptional = repository.findById(id);
+        Optional<Topics> topicsOptional = Optional.ofNullable(repository.findByTopicsEntityIdId(id));
         if (topicsOptional.isPresent()) {
             return topicsOptional.get();
         } else {

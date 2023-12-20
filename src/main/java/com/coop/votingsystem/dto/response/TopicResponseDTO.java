@@ -3,6 +3,7 @@ package com.coop.votingsystem.dto.response;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @Getter
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import java.util.Date;
 public class TopicResponseDTO {
     private Long id;
     private String title;
-    private Date votingDate;
+    private LocalDateTime votingDate;
     private String description;
 
 }

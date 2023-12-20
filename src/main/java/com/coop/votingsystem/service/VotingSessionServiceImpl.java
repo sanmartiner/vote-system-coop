@@ -39,7 +39,7 @@ public class VotingSessionServiceImpl implements VotingSessionService {
 
     @Override
     public boolean sessionExists(Topics topic, LocalDateTime now) {
-        return !Objects.isNull(repository.findByTopicsId_Id(topic.getId().getId()));
+        return !Objects.isNull(repository.findByTopicsId_Id(topic.getTopicsEntityId().getId()));
     }
 
     @Override

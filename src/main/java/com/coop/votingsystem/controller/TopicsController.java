@@ -18,7 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.Objects;
+
 @Slf4j
 @RestController
 @RequestMapping("api/v1/votingSystem/topics")
@@ -46,10 +47,10 @@ public class TopicsController {
     })
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<TopicResponseDTO> topicsRegister(@RequestBody final TopicRequestModel topicRequestModel) {
+        public ResponseEntity<Object> topicsRegister(@RequestBody final TopicRequestModel topicRequestModel) {
             Long id = service.topicsRegister(Topics.builder()
                     .description(topicRequestModel.getDescription())
-                    .id(TopicsEntityId.builder()
+                    .topicsEntityId(TopicsEntityId.builder()
                             .title(topicRequestModel.getTitle())
                             .build())
                     .votingDate(topicRequestModel.getVotingDate())
@@ -76,9 +77,19 @@ public class TopicsController {
     })
 
     @GetMapping(value = "/getOne/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TopicResponseDTO> getOne(@PathVariable long id) {
-        TopicResponseDTO topic = modelMapper.map(service.getById(id), TopicResponseDTO.class);
-        return ResponseEntity.ok(topic);
+    public ResponseEntity<Object> getOne(@PathVariable Long id) {
+        Topics t = service.getById(id);
+
+        if (Objects.isNull(t)) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(TopicResponseDTO.builder()
+                .id(t.getTopicsEntityId().getId())
+                .votingDate(t.getVotingDate())
+                .title(t.getTopicsEntityId().getTitle())
+                .description(t.getDescription())
+                .build());
     }
 
     @ApiOperation(value = "List all topics with pagination", response = TopicResponseDTO.class)
@@ -96,16 +107,16 @@ public class TopicsController {
 
 
     @GetMapping(value = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<TopicResponseDTO>> getAll(
+    public ResponseEntity<Object> getAll(
             @RequestParam int size,
             @RequestParam int page,
             @RequestParam(required = false, defaultValue = "asc") String direction,
-            @RequestParam(required = false, defaultValue = "id") String sortField) {
+            @RequestParam(required = false, defaultValue = "topicsEntityId.id") String sortField) {
 
         Sort sort = Sort.by(Sort.Direction.fromString(direction), sortField);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<TopicResponseDTO> response = service.getAll(pageable).map(topic -> modelMapper.map(topic, TopicResponseDTO.class));
+        Page<Topics> response = service.getAll(pageable);
 
         return ResponseEntity.ok(response);
     }

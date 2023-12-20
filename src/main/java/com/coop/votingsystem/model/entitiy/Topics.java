@@ -3,10 +3,10 @@ package com.coop.votingsystem.model.entitiy;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "topics", schema = "votingsystem")
+@Table(name = "topics", schema = "votingsystem")  // Add schema if needed
 @Builder
 @Getter
 @EqualsAndHashCode
@@ -15,15 +15,14 @@ import java.util.Date;
 public class Topics {
 
     @EmbeddedId
-    private TopicsEntityId id;
+    private TopicsEntityId topicsEntityId;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name="voting_date")
-    private Date votingDate;
+    @Column(name = "voting_date")
+    private LocalDateTime votingDate;
 
 }
-
 
 
