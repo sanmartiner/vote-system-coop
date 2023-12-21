@@ -11,7 +11,7 @@ WORKDIR /app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Copy the JAR file into the container
-COPY voting-system-coop/target/classes/com/coop/votingsystem/RestApplication.jar /app/app.jar
+#COPY voting-system-coop/target/*spring-boot.jar /app/app.jar
 
 # Change ownership of the /app directory to non-root user
 RUN chown -R appuser:appgroup /app
