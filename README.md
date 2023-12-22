@@ -7,6 +7,8 @@ Voting system for assembly elections by Coop Company
 * Java 17
 * Maven
 * RabbitMQ
+* Docker
+* Docker Compose
 
 
 ## Build the package (From the path of the "pom.xml" root aggregator)
@@ -17,6 +19,11 @@ mvn clean package -U -pl voting-system -am
 ## Install the application
 ```
 mvn clean install -U -pl voting-system  -am
+```
+## Start the application
+```
+docker-compose build
+docker-compose up -d
 ```
 
 This is an API for managing voting sessions in a cooperative context. It allows the creation of agendas, opening voting sessions, receiving votes from members and recording the results.

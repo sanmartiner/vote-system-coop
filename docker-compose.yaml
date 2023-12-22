@@ -10,10 +10,14 @@ services:
       - "3306:3306"
     networks:
       - voting-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 20
 
   # RabbitMQ Service
   rabbitmq:
-    image: "rabbitmq:management"
+    image: rabbitmq:management
     environment:
       RABBITMQ_DEFAULT_USER: developer
       RABBITMQ_DEFAULT_PASS: dev123
@@ -22,7 +26,16 @@ services:
       - "15672:15672"
     networks:
       - voting-network
-    command: /bin/bash -c "scripts/rabbitmq-init.sh && rabbitmq-server"
+    volumes:
+      - ./scripts/rabbitmq-init.sh:/rabbitmq-init.sh
+    depends_on:
+      - mysql
+    command: /bin/sh -c "/rabbitmq-init.sh"
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   # Spring Boot Application
   spring-app:
@@ -30,8 +43,10 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - mysql
-      - rabbitmq
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
